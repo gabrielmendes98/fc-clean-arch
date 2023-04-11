@@ -1,0 +1,5 @@
+{
+  "jestrunner.jestCommand": "npm test",
+  "jestrunner.codeLensSelector": "**/*.{test,spec,e2e-spec}.{js,jsx,ts,tsx}",
+  "jest.rootPath": "./src"
+}
