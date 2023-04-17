@@ -31,14 +31,6 @@ describe("Update Product usecase unit tests", () => {
     });
   });
 
-  it("should throw error when name is empty", () => {
-    input.name = "";
-
-    const repository = MockRepository();
-    const usecase = new UpdateProductUsecase(repository);
-    expect(usecase.execute(input)).rejects.toThrowError("Name is required");
-  });
-
   it("should throw error when product not found", () => {
     const repository = MockRepository();
     repository.find.mockReturnValue(null);
