@@ -74,5 +74,26 @@ describe("E2E test for customer", () => {
     const customer2 = listResponse.body.customers[1];
     expect(customer2.name).toBe("Jane");
     expect(customer2.address.street).toBe("Street 2");
+
+    const xmlResponse = await request(app)
+      .get("/customer")
+      .set("Accept", "application/xml")
+      .send();
+
+    expect(xmlResponse.status).toBe(200);
+    expect(xmlResponse.text).toContain(
+      `<?xml version="1.0" encoding="UTF-8"?>`
+    );
+    expect(xmlResponse.text).toContain(`<customers>`);
+    expect(xmlResponse.text).toContain(`<customer>`);
+    expect(xmlResponse.text).toContain(`<name>John</name>`);
+    expect(xmlResponse.text).toContain(`<address>`);
+    expect(xmlResponse.text).toContain(`<street>Street</street>`);
+    expect(xmlResponse.text).toContain(`<city>City</city>`);
+    expect(xmlResponse.text).toContain(`<number>123</number>`);
+    expect(xmlResponse.text).toContain(`<zip>12345</zip>`);
+    expect(xmlResponse.text).toContain(`</address>`);
+    expect(xmlResponse.text).toContain(`</customer>`);
+    expect(xmlResponse.text).toContain(`</customers>`);
   });
 });
